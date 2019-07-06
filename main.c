@@ -6,6 +6,7 @@
 #define NUM_OF_OPER 10
 #define NUM_OF_THREADS 5
 
+//The project for OS class
 int sharedVal = 0;
 int gWaitingReaders = 0, gReaders = 0;
 
