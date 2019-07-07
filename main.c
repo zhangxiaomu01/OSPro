@@ -101,9 +101,6 @@ int main(int argc, char *argv[])
             printf("Writer thread %d joined!\n", numThreads[i]);
     }
     
-    //int x = rand();
-    //printf("Testing random generated number: %d \n", x);
-    
     printf("Our threads exit normally!\n");
     return 0;
 }
