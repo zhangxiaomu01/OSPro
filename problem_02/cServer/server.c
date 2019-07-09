@@ -16,17 +16,53 @@ void error(char* msg){
     exit(1);
 }
 
+void GenerateUpperCaseFunc(char* msg){
+    int len = strlen(msg);
+    for(int i = 0; i < len; ++i){
+        if(msg[i] >= 'a' && msg[i] <= 'z'){
+            msg[i] = msg[i] - 32;
+        }
+    }
+}
+
+void HandleClientEventFunc(int acSockfd){
+    //Server will read the characters from the socket connection to this buffer
+    char msgBuffer[g_bufferSize];
+    //n - return value for the read() and write() calls / contains the number of characters read or written.
+    int n;
+
+    /*
+    Note that we would only go to this point when client successfully connected to the server! We first initialize the buffer with 0s, then read from the socket.
+    Note we use acSockfd, instead of the sockfd. read() will block until there is something for it to read in the socket, i.e. after the client has executed a
+    write().
+     */
+    __bzero(msgBuffer, g_bufferSize);
+    //The read() function will read the total number of characters in the socket or g_bufferSize - 1 in this case.
+    n =read(acSockfd, msgBuffer, g_bufferSize-1);
+    if(n < 0)
+        error("Error: Reading from the socket : server!");
+    printf("Here is the original message: %s \n", msgBuffer);
+    
+    GenerateUpperCaseFunc(msgBuffer);
+
+    //Once a connection has been successfully connected, both ends can both read and write to the connection. Naturally, everything written by the client will 
+    //be read by the server, everything written by the server will be read by the client. The last argument is the size of the message.
+    n = write(acSockfd, msgBuffer, g_bufferSize);
+
+    if(n == -1)
+        error("Error: server cannot write to socket!");
+}
+
 void setServer(int argc, char *argv[]){
     //sockfd / acSockfd - file descriptors for socket. sockfd will be used in socket() call, and acSockfd will be used in accept()
     int sockfd, acSockfd;
 
     //portID - ID for port number on which the server accepts connection
     //clientLen - stores the size of the address of the client. This is needed for the accept system call.
-    //n - return value for the read() and write() calls / contains the number of characters read or written.
-    int portId, clientLen, n;
+    
+    int portId, clientLen;
 
-    //Server will read the characters from the socket connection to this buffer
-    char msgBuffer[g_bufferSize];
+    int pid; //defines the process id number
 
     //sockaddr_in contains an internet address. Check the definition for more info.
     struct sockaddr_in servAddr, clientAddr;
@@ -84,32 +120,30 @@ void setServer(int argc, char *argv[]){
     cannot fail. Therefore, the code does not check for error.
      */
     listen(sockfd, 5);
+    clientLen = sizeof(clientAddr); 
 
-    /*
-    The accept() system call causes the process to block until a client connects to the server. Thus it wakes up the process when a connection from a client
-    has been successfully established. It returns a new file descriptor, and all communication on this connection should be done using the new file descriptor.
-    The second argument is a reference pointer to the address of the client on the other end of the connection, the third argument is the size of this structure.
-     */
-    clientLen = sizeof(clientAddr);
-    acSockfd = accept(sockfd, (struct sockaddr*)(&clientAddr), &clientLen);
-    if(acSockfd == -1)
-        error("Error: accept process fails.");
-
-    /*
-    Note that we would only go to this point when client successfully connected to the server! We first initialize the buffer with 0s, then read from the socket.
-    Note we use acSockfd, instead of the sockfd. read() will block until there is something for it to read in the socket, i.e. after the client has executed a
-    write().
-     */
-    __bzero(msgBuffer, g_bufferSize);
-    //The read() function will read the total number of characters in the socket or g_bufferSize - 1 in this case.
-    n =read(acSockfd, msgBuffer, g_bufferSize-1);
-    if(n < 0)
-        error("Error: Reading from the socket : server!");
-    printf("Here is the message: %s \n", msgBuffer);
-    
-    //Once a connection has been successfully connected, both ends can both read and write to the connection. Naturally, everything written by the client will 
-    //be read by the server, everything written by the server will be read by the client. The last argument is the size of the message.
-    n = write(acSockfd, "I got your message", 18);
+    while(1){
+        /*
+        The accept() system call causes the process to block until a client connects to the server. Thus it wakes up the process when a connection from a client
+        has been successfully established. It returns a new file descriptor, and all communication on this connection should be done using the new file descriptor.
+        The second argument is a reference pointer to the address of the client on the other end of the connection, the third argument is the size of this structure.
+        */
+        acSockfd = accept(sockfd, (struct sockaddr*)(&clientAddr), &clientLen);
+        if(acSockfd == -1)
+            error("Error: accept process fails.\n");
+        
+        //create a new process.
+        pid = fork();
+        if(pid == -1)
+            error("Error: process cannot be created!\n");
+        
+        if(pid == 0){
+            close(sockfd);
+            HandleClientEventFunc(acSockfd);
+            exit(0);
+        }
+        else close(acSockfd); //main thread will close acSockfd
+    }
 }
 
 int main(int argc, char *argv[])
