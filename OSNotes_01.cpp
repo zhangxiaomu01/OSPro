@@ -157,3 +157,25 @@ b) Multitasking (time-sharing system)
 */
 
 
+
+//***************************************************************************
+//7. Operating system service
+/*
+- User interface (Command line interface vs. Graphic user interface)
+- Program execution
+- I/O operation
+- File system manipulation
+- Communications
+- Error detection
+- Resource allocation
+- Accounting
+- Protection and security
+*/
+
+
+//***************************************************************************
+//8. System calls
+/*
+System calls provide an interface to the services made available by an operating
+system.
+*/
