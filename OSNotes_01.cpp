@@ -178,4 +178,40 @@ b) Multitasking (time-sharing system)
 /*
 System calls provide an interface to the services made available by an operating
 system.
+System call is a programmatic way in which the computer program requests a 
+service from the kernel of the OS. These calls are generally available as routines
+written in C and C++. 
+
+Types of system calls:
+a) Process Control
+    - end, abort
+    - load, execute
+    - create or terminate process
+    - get / set process attributes
+    - wait for time
+    - wait event, signal event
+    - allocate / free memory
+
+b) File Manipulation
+    - Create / delete file
+    - Open / close file
+    - read / write / reposition file
+    - get / set file attributes
+
+c) Device Management
+    - request / release device
+    - read / write / reposition device
+    - get / set device attributes
+    - logically attach / detach devices
+
+d) Information Maintenance
+    - get / set time or date
+    - get / set system data
+    - get / set process, file and device attributes
+
+e) Communications
+    - create / delete communication connection
+    - send / receive messages
+    - transfer status information
+    - attach / detach remote devices
 */
