@@ -86,3 +86,74 @@ that the operation has been completed;
 available for other tasks.
 
 */
+
+
+//***************************************************************************
+//5. Computer System Architecture
+/*
+Types of computer systems based on the number of General Purpose Processors:
+a) Single Processor System
+    - One main CPU capable of executing a general purpose instruction set, 
+    including instructions from user processes.
+    - Other special purpose processors are also present which perform device
+    specific task.
+
+
+b) Multiprocessor System
+    - Has two or more processors in close communication, sharing the computer 
+    bus and sometimes the clock, memory and peripheral devices.
+    - Also known as parallel systems or tightly coupled systems.
+    
+    Advantages: 
+    1) Increased throughput 
+    2) Economy of scale
+    3) Increased reliability
+
+    Type of multiprocessor system:
+    -Symmetric Multiprocessing
+        All processors perform similar tasks!
+    -Asymmetric Multiprocessing
+        One master processor + multiple slave processors!
+
+
+c)Clustered System
+    - Like multiprocessor system, clustered systems gather together multiple 
+    CPUs to accomplish computational work.
+    - They are composed of two or more individual systems coupled together.
+    - Provides high availability.
+    - Can be structured asymmetrically or symmetrically.
+        -asymmetrical mode:
+            1) One machine in hot-standby mode
+            2) Others run applications
+        -symmetrical mode (preferred):
+            1) Two or more hosts run applications
+            2) Monitor each other
+
+*/
+
+
+//***************************************************************************
+//6. Operating system structure - Multiprogramming && Multitasking
+/*
+a) Multiprogramming
+    - A single user cannot, in general, keep either the CPU or the I/O device
+    busy all the time;
+    - Multiprogramming increases CPU utilization by organizing jobs (code and 
+    data) so that CPU always has one to execute.
+    - Multiprogramming does not provide for the user interaction with the 
+    computer system.
+
+b) Multitasking (time-sharing system)
+    - CPU executes multiple tasks by switching among them;
+    - Switch occurs so frequently that users can interact with each program while
+    it is running;
+    - Time-sharing requires an interactive (hands-on) computer system, which 
+    provides direct communication between the user and the system;
+    - A time-sharing operating system allows many users to share the computer
+    simultaneously.
+        - Each user has at least one separate program in memory;
+        - A program that loaded into memory and executing is called a "process"
+
+*/
+
+
