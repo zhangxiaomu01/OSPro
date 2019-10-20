@@ -215,3 +215,41 @@ e) Communications
     - transfer status information
     - attach / detach remote devices
 */
+
+
+//***************************************************************************
+//9. System programs
+/*
+An important aspect of modern system is the collection of system programs.
+- System program provides an convenient environment for program development and
+execution;
+
+Some system programs can be divided into the following categories:
+    - File Management
+        - Create, delete, copy, rename, print, dump.
+        - List and generally manipulate files and directories.
+    - Status Information
+        - Data, time
+        - Amount of available memory or disk space
+        - Number of users
+        - Detailed performance
+        - Logging and debugging information etc.
+    - File Modification
+        - Modify the content of the file
+        - Transformation of the file
+    - Programming language support
+        - Compiler, Assemblers, Debuggers and Interpreters
+        (Common programming language such as C, C++, Java or VB are often provided
+        to the user with the operating system) 
+    - Program loading and executing
+        The system may provide: 
+            a) Absolute loaders b) Reloacate loaders
+            c) Linkage editors  d) Overlay loaders
+        Debugging systems for either high-level language or machine language are
+        needed as well.
+    - Communications
+        Creating virtual connections between processes, users or computer systems.
+*/
+
+
+
