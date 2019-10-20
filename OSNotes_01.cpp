@@ -252,4 +252,26 @@ Some system programs can be divided into the following categories:
 */
 
 
+//***************************************************************************
+//10. Operating system design & implementation
+/*
+1. Design goals:
+First problem: Defining goals and specification
+    - Choice of hardware
+    - Types of system
+Beyond this highest design level, the requirements may be much harder to specify.
+Requirements:
+    - User goal
+    - System goal
+
+A design principle: Always separate mechanism from policy.
+
+Practical structures of OS:
+1) Simple Structure
+2) Monolithic Structure
+3) Layered Structure
+4) Microkernels Structure
+5) Modules Structure
+
+*/
 
