@@ -275,3 +275,50 @@ Practical structures of OS:
 
 */
 
+
+//***************************************************************************
+//11. Virtual Machine
+/*
+The fundamental idea behind the virtual machine is to abstract the hardware of 
+a single computer (CPU, memory, disk drives, network interface card, and so forth)
+into several different execution environment, thereby creating the illusion that
+each separate execution environment is running its own private computer.
+
+virtual machine implementation software - runs in actual kernel mode
+virtual machine itself - runs in user mode (including virtual machine kernel 
+                         mode and virtual machine user mode)
+
+*/
+
+
+//***************************************************************************
+//12. Operating system generation and system boot
+/*
+A process sometimes known as system generation (SYSGEN) is used to configure or
+generate operating system for specific computer site.
+
+The following kinds of information must be determined by SYSGEN program:
+- What CPU is to be used?
+- How much memory is available?
+- What devices are available?
+- What operating system options are desired?
+
+
+System boot:
+The procedural of starting a computer by loading the kernel is known as booting.
+
+On most computer systems, a small piece of code known as bootstrap program or 
+bootstrap loader locates the kernel. This program is in the form of read-only
+memory (ROM), because the RAM is an unknown state at system startup. ROM is 
+convenient because it needs no initialization and cannot be infected by a computer
+virus.
+
+Firmware - A kind of read-only memory for small devices. (bootstrap program, even
+OS can reside in it. Difficult to update!)
+
+
+When the full bootstrap program has been loaded, it can traverse the file system
+to find the OS kernel, load it into memory and start its execution. Only at this
+point the system is said to be running!
+*/
+
