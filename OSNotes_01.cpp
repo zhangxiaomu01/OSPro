@@ -363,3 +363,44 @@ Content of PCB:
 */
 
 
+//***************************************************************************
+//14. Process scheduling and context switch
+/*
+- The objective of multiprogramming is to have some processes running at all 
+times, to maximum CPU utilization.
+- The objective of time sharing is to switch the CPU among processes so 
+frequently that users can interact with each program while it is running.
+- To meet these objectives, the process scheduler selects an available process (
+possibly from a set of available processes) for program execution on the CPU.
+    - For single-processor system, there will never be more than one running  
+    process; if there are more processes, the rest will have to wait until the 
+    CPU is free and can be rescheduled.
+
+Scheduling queues:
+- Job queue: As processes enter the system, they are put into a job queue, which 
+             consists of all processes in the system.
+- Ready queue: The processes are residing in the main memory and are ready and 
+               waiting to execute are kept on a list called the ready queue.
+
+
+Context Switch:
+Interrupts cause the operating system to change a CPU from its current task and 
+to run a kernel routine. Such operations happen frequently on general-purpose
+systems. 
+
+When an interrupt occurs, the system needs to save the current *Context* of the 
+process currently running on the CPU so that it can restore that context when 
+the new required processing is done. (Suspending the process and then resume it)
+The context is represented in the PCB of the process.
+
+Switching the CPU to another process requires performing a state save of the 
+current process and a state restore of different process (Context Switching).
+    - Context-switch time is pure overhead, because the system does no useful 
+    work while switching;
+    - Its speed varies from machine to machine, depending on the memory speed,
+    the number of registers that must be copied, and the existance of special
+    instructions (such as a single instruction to store or load all registers).
+    - Typical speed is a few milliseconds.
+
+*/
+
