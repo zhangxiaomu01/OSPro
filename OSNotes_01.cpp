@@ -322,3 +322,44 @@ to find the OS kernel, load it into memory and start its execution. Only at this
 point the system is said to be running!
 */
 
+
+//***************************************************************************
+//13. Process management (processes and threads)
+/*
+A process can be considered as a program in execution.
+
+A thread is the unit of execution within a process. A process can have multiple
+threads.
+
+Process State: defined by the current activity of the process. During the execution
+of the process, its state changes accordingly. 
+- New state: The process is being created.
+- Running state: Instructions are being executed.
+- Waiting state: The process is waiting for some event to occur. (I/O or signal)
+- Ready state: The process is waiting to be assigned to a processor.
+- Terminated state: The process has finished execution.
+
+New state => Admitted => Ready state;
+Ready state => Scheduler dispatch => Running state;
+Running state => Exit => Terminated state;
+Running state => Interrupt => Ready state;
+Running state => I/O or Event wait => Waiting state;
+Waiting state => I/O or Event completion => Ready state;
+
+
+Process control block (PCB): representation of a process in OS.
+Content of PCB:
+    - Process State
+    - Process Number(ID)
+    - Program Counter
+    - Registers
+    - Memory Limits
+    - List of Open Files
+    - CPU Scheduling Information
+    - Memory Management Information
+    - Accounting Information
+    - I/O Status Information
+    ...
+*/
+
+
