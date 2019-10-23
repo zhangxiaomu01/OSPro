@@ -404,3 +404,105 @@ current process and a state restore of different process (Context Switching).
 
 */
 
+
+//***************************************************************************
+//15. Process creation and termination
+/*
+Process Creation:
+- A process may create several new processes, via a create-process system call,
+during the course of execution. Each of these new processes may create other 
+processes, forming a tree of processes.
+- When a process create a new process, two possibilities exist in terms of 
+execution:
+    a) The parent continue to execute concurrently with its children;
+    b) The parent wait until some or all of the children have terminated.
+- When a process create a new process, two possibilities exist in terms of 
+address space:
+    a) The child process is the duplicate of parent process (It has the same 
+    program and data as the parent);
+    b) The child process has a new program loaded into it.
+
+Process Termination:
+- A process terminates when it finishes executing its final statement and ask the
+operating system to delete it by using the exit() system call.
+- At that point, the process may return a status value (typically an integer) to
+its parent process (via the wait() system call).
+- All the resources of the process - including physical or virtual memory, open 
+files, and I/O buffers - are deallocated by the operating system.
+
+Termination can also occur in other circumstances as well:
+- A process can cause the termination of another processes via an appropriate 
+system call;
+- Usually, such a system call can be invoked only by the parent of the process
+that is to be terminated. Otherwise, processes could arbitrarily kill each 
+other's jobs. 
+
+A parent may terminate the execution of one of its children for a variaty of 
+reasons, such as:
+- The child has exceeded its usage of some of the resources that has been 
+allocated (To determine whether this happens, the parent must have a mechanism
+to inspect the status of the children);
+- The task assigned to the child is no longer required;
+- The parent is existing, and the OS does not allow a child to continue when its
+parent terminates.
+*/
+
+
+//***************************************************************************
+//16. Interprocess communication - shared memory && message passing
+/*
+Processes executing concurrently in the operating system may be either independent
+process or cooperating process:
+Independent processes - They cannot affect or be affected by other processes 
+                        executing in the system;
+Cooperating processes - They can affect or be affected by other processes 
+                        executing in the system;
+Any process that shares data with other processes is a cooperating process.
+
+Reasons for providing process cooperation:
+    - Information sharing
+    - Computation speedup
+    - Modularity
+    - Convenience
+
+Cooperating processes require an interprocess communication (IPC) mechanism that
+will allow them to change data and information.
+There are two fundumental models of interprocess communication:
+- ** shared memory **
+    - In the shared memory model, a region of memory that is shared by cooperating
+    processes is established;
+    - Processes can then exchange information by reading and writing data to the 
+    shared region.
+    - Typically, a shared memory resides in the address space of the process 
+    creating the shared memory segment (processes which want to communicate 
+    with other processes). Other processes want to communicate using this shared
+    memory segment must attach it to their address space.
+
+For example:
+    Process A => write => shared memory => read => Process B
+
+Normally, the operating system tries to prevent one process from accessing 
+another process's memory. Shared memory requires that two or more processes agree
+to remove this restriction.
+
+Producer - consumer problem (A simple case, omit here).
+
+Two kind of buffers: 
+- Unbounded buffers 
+    - Places no practical limit of the size of the buffer. The consumer may wait
+    for new items, but the producer can always produce new item.
+
+- Bounded buffers
+    - Assumed a fixed buffer size. In this case, the consumer must wait if the 
+    buffer is empty while the producer must wait if the buffer is full.
+
+
+
+- ** message passing **
+    - In the message passing model, communication takes place by means of messages
+    exchange between the coorperating processes.
+
+For example:
+    Process A => message sending => kernel => message receiving => Process B
+
+*/
