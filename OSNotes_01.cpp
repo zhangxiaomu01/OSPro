@@ -626,8 +626,104 @@ in 3 ways:
 //***************************************************************************
 //17. Sockets in operating system
 /*
+Sockets: Used for communication in client - server system
+- A socket is defined as an end point for communication;
+- A pair of processes communicating over a network employ a pair of sockets, one
+for each process;
+- A socket is identified by an IP address concatenated with a port number;
+- The server waits for incoming client requests by listening to a specified port.
+Once a request is received, the server accepts a connection from the client socket
+to complete the connection.
+- Server implementing specific services (such as telnet, ftp and http) listen to
+well known ports. (A telnet server listens to port 23, ftp - port 21 and http - 
+port 80);
+- All ports below 1024 are considered well-known, we can use them to implement
+standard service.
+
+Communication using socket:
+Client side:
+    - When a client process initiates a request for a connection, it's assigned
+    a port by the host computer;
+    - The port is some arbitrary number greater than 1024.
+Server side:
+    - The packets traveling between the hosts are delievered to the appropriate
+    process based on the destination port number.
+
+*/
 
 
+//***************************************************************************
+//18. Remote Procedure Call (RPC)
+/*
+Remote procedure call (RPC) is a protocal that one program can use to request 
+a service from a program located in another computer on a network without 
+having to understand network's detail. 
+    - It's similar in many respects to inter process communicating mechanism;
+    - Because the processes reside in different systems, we must use message
+    passing scheme to handle the remote service.
+    - In contrast to IPC facility,  the messages exchanged in RPC communication
+    are well structured and are no longer just packets of data.
+    - Each message is addressed to an RPC daemon listening to a port on the remote
+    system, and each contains an identifier of the function to execute and the 
+    parameters to pass to that function. 
+    - The function is then executed as requested, and any output is sent banck 
+    to the requester in a separate message.
+
+The semantics of RPCs allow a client to invoke a procedure on a remote host as 
+it would invoke a procedure locally:
+- The RPC system hides the details that allow communication to take place by 
+providing a stub on the client side;
+- Typically, a separate stub exists for each separate remote procedure. 
+- When the client invokes a remote procedure, the RPC system calls the appropriate
+stub, passing it the parameters provided to the remote procedure. This stub locates
+the prot on the server and marshals the parameters;
+- Parameter marshalling involves packaging the parameters into a form that can be
+transmitted over a network;
+- The stub then trasmits the message to the server using message passing;
+- A similar stub on the server side receives the message and invokes the procedure
+on the server;
+- If necessarily, return values are passed back to the client using the same 
+techniques.
+
+
+Issues in RPC and how they are solved:
+Issue 1:
+- Difference in data representation on the client and server machines. (e.g. 
+representation of 32 bits integers may be different. Some system stores the most
+significant byetes in high memory address, some stores in low memory address)
+Solution:
+- RPC system defines a machine independent representation of data. One such 
+representation is known as external data representation (XDR). One the client
+side, parameters marshalling convert the machine dependent data into XDR before
+they are sent to the server; while on the server side, we reverse the process.
+
+Issue 2:
+- Whereas local procedure calls fail only under extreme circumstances, RPCs can
+fail, or be duplicated and executed more than once, as a result of common network
+error.
+Solution:
+- The operating system must ensure that messages are acted exactly once, rather
+than at most once. Most local procedure calls have the "exactly once" functionality,
+but it's more difficult to implement.
+
+Issue 3:
+- With standard procedure calls, some form of binding takes place during link, 
+load or execute time so that a procedure call's name is replaced by the memory
+address of the procedure call. The RPC scheme requires a similar binding of the
+client and server port, but how does the client know the port numbers on the 
+server? Neither system has information about the other because they do not share
+memory with each other.
+Solution:
+- 1) The binding information may be predetermined, in the form of fixed port 
+address. At compile time, an RPC call has a fixed number associated with it. Once the 
+program is compiled, the server cannot change the port number of the requested
+service;
+- 2) Binding can be done by a rendezvous mechanism. Typically, an operating system
+provides a rendezvous (matchmaker) daemon on a fixed RPC port. A client then send
+the message containing the name of the RPC to the rendezvous daemon requesting the
+port address of the RPC it needs to execute. Then the port number is returned, 
+and the RPC calls can be sent to that port until the process terminates. (or the
+service crashes)
 
 */
 
