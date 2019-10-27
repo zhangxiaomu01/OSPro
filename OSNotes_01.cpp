@@ -593,5 +593,41 @@ the message). The system may identify the receiver to the sender.
 
 A mailbox may either be owned by a process or by the operating system.
 
+
+Issue 2 Synchronization:
+Communication between processes takes place through calls to send() and receive()
+primitives. Message passing may be either blocking or nonblocking, which also 
+known as synchronous and asynchronous. 
+    Blocking send: The sending process is blocked until the message is received
+    by the receiving process or by the mailbox;
+    Nonblocking send: The sending process sends the message and resumes the 
+    operation;
+    Blocking receive: The receiver is blocked until a message is available;
+    Nonblocking receive: The receiver receives either a valid message or a null.
+
+Issue 3 Buffering:
+Whether communication is direct or indirect, messages exchanged by communicating
+processes reside in a temporary queue. Basically, such queue can be implemented
+in 3 ways:
+    - Zero Capacity: The queue has a maximum length of 0, thus the link cannot 
+    have any messages waiting in it. In this case, the sender must be blocked 
+    until the receipient receives the message;
+    - Bounded Capacity: The queue has finite length n, so at most n messages can
+    reside in it. If the queue is not empty when a new message is sent, the 
+    message is placed in the queue and the sender can continue executing without
+    waiting. If the queue is full, the sender must be blocked until space is 
+    available in the queue.
+    - Unbounded Capacity: The queue's length is potentially infinite. Any number 
+    of messages can reside in it. The sender will never be blocked.
+*/
+
+
+
+//***************************************************************************
+//17. Sockets in operating system
+/*
+
+
+
 */
 
