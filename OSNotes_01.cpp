@@ -501,8 +501,97 @@ Two kind of buffers:
 - ** message passing **
     - In the message passing model, communication takes place by means of messages
     exchange between the coorperating processes.
+    - Message passing provides a mechanism to allow processes to communicate and
+    synchoronize their actions without sharing the same address space;
+    - It's particularly useful in a distributed environment, where communicating
+    processes may reside on different computers which are connected by network.
 
 For example:
     Process A => message sending => kernel => message receiving => Process B
 
+A message passing facility provides at least two operations:
+    send(message) && receive(message)
+
+Messages sent by a process can be of fixed size or variable size.
+Fixed size message: The system level of implementation is straightforward, but 
+makes the task of programming more difficult;
+Variable size message: The system level of implementation is more complex, but 
+the programming task is easier.
+
+If process P and Q want to communicate, they must send message to and receive 
+message from each other. Then a communication link must exist between them.
+
+The communication link can be implemented in a variety of ways. There are several
+methods for logically implementing a link and the send() / receive() operations,
+like:
+    - Direct or indirect communication
+    - Synchoronous or asynchoronous communication
+    - Automatic or explicit buffering  
+
+Several issues are related with features like:
+    - Naming
+    - Synchoronization
+    - Buffering
+
+
+Issue 1: Naming
+The processes that want to communicate must have a way to refer each other. They
+can use either *Direct* or *Indirect* communication
+
+Direct Communication: Each process that wants to communicate must explicitly name
+the receipient or sender of the communication.
+    - send(Q, message) send a message to process Q
+    - receive(P, message) receive a message from process P
+A communication link in this scheme has the following properties:
+    - A link is established automatically between each pair of the processes that
+    want to communicate. The processes need to know each other's identity to 
+    communicate.
+    - A link is associated with exactly two processes. 
+    - Between each pair of processes, there exists exactly one link. 
+This scheme exhibits symmetry in addressing: that is both the sender process or 
+the receiver process must name the other to communicate. 
+
+Another variant of Direct Communication: Only the sender name the receipient;
+the receipient is not required to name the sender.
+    - send(Q, message) send a message to process Q
+    - receive(id, message) receive a message from any process. The varibale id is
+                           set to the name of the process with which the 
+                           communication has taken place.
+This scheme exhibits asymmetry in addressing.
+
+The disadvantage in both of these schemes (symmetric or asymmetric) is the limited
+modularity of the resulting process definitions. Changing the identifier of one
+process may necessitate examing all other process definitions. 
+
+Indirect Communication: The messages are sent to or received from a mailbox or 
+ports.
+    - A mailbox canbe viewed abstractly as an object into which messages can be
+    placed and from which messages can be removed by processes;
+    - Each mailbox has unique identification;
+    - Two processes can communicate only if the processes have a shared mailbox.   
+
+    send(A, message) - send a message to mailbox A
+    receive(A, message) - receive a message from mailbox A
+
+A communication link in this scheme has the following properties:
+- A link is established between each pair of processes only if both member of
+the pair have a shared mailbox;
+- A link may be associated with more than two processes;
+- Between each pair of communicating processes, there may be a number of different
+links, with each link corresponding to one mailbox.
+ 
+Then if a process P1 sends a message to mailbox A, while both P2 and P3 execute
+an receive() from A. Which process will receive the message sent by P1?
+The answer depends on which of the following methods we choose?
+- Allow a link to be associated with two processes at most;
+- Allow at most one process at a time to execute the receive() method;
+- Allow the system to arbitrarily choose which process will receive the message(
+that is, either P2 or P3, but not both). The system may also defining an algorithm
+to do such selection (that is, round robin where processes take turns receiving
+the message). The system may identify the receiver to the sender.
+
+
+A mailbox may either be owned by a process or by the operating system.
+
 */
+
