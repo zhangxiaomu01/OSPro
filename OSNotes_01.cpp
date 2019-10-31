@@ -863,4 +863,48 @@ to check whether it should be canceled at a point when it can be canceled safely
 */
 
 
+//***************************************************************************
+//22. Introduction to CPU scheduling
+/*
+CPU scheduling is the basis of multiprogrammed operating system;
+By switching the CPU among processes, the OS can make computer more productive!
+- In a single processor system, only one process can run at a time;
+- Any others must wait until the CPU is free and can be rescheduled.
+    - The objective of multiprogramming is to have some process running at all 
+    times, to maximum CPU utilization.
+    - A process is executed until it must wait, typically for the completion of
+    some I/O request.
+When one process has to wait, OS takes the CPU away from that process and gives 
+the CPU to another process and this pattern continues.
 
+CPU burst and I/O burst cycle
+Process execution consists of a cycle of CPU execution and I/O wait, and processes
+alternate between these two stages.
+The final CPU burst is a system call to terminate the process.
+
+
+Preemptive and non-preemptive scheduling
+CPU scheduler: Whenever the CPU becomes idle, the OS must select one of the processes
+in the ready queue to be executed. The selection process is carried out by the
+short term scheduler (CPU scheduler). The scheduler selects a process from the
+processes in memory that are ready to execute and allocates the CPU to that process.
+
+Dispatcher: The dispatcher is the module that gives control of the CPU to the 
+process selected by the short-term scheduler. The time it takes to stop one process
+and start another running is known as the dispatch latency. 
+
+CPU scheduling decisions may take place under the following four circumstances:
+1) When a process switches from *running state* to the *waiting state*.
+2) When a process switches from *running state* to the *ready state* (for example,
+when an interrupt occurs).
+3) When a process switches from *waiting state* to the *ready state* (for example,
+at completion of I/O operation).
+4) When a process terminates.
+
+For situation 1) and 4), there is no choice in terms of scheduling. A new process(
+if one exists in the ready queue) must be selected for execution. However, there
+is a choice for 2) and 3).
+
+When scheduling only happens under 1) and 4), we say that the scheduling scheme
+is non-preemptive or cooperative; otherwise, it is preemptive.
+*/
