@@ -755,4 +755,46 @@ be greatly increased in a multiprocessor architecture, where threads may be runn
 in parallel on different processors. A single threaded process can only run on
 one CPU, no matter how many are available. Multithreading on a multi-CPU machine
 increases concurrency.
+
+
+Multithreading Model and Hyperthreading
+Types of thread:
+1) user thread: Supported above the kernel and managed without kernel support;
+2) kernel thread: Supported and managed directly by operating system.
+
+Three common ways to establish a relationship between user thread and kernel 
+thread:
+- Many to one mode:
+    + Maps many user threads to one kernel thread. 
+    + Thread management is done by the thread libraray in user space, so it is
+    efficient.
+    - The entire process will block if a thread makes a blocking system call.
+    - Because only one thread can access the kernel thread at a time, multiple
+    threads are unable to run parallel on multiprocessors.
+- One to one mode:
+    = Maps each user thread to a kernel thread.
+    + Provide more concurrency than the many to one mode by allowing aonther 
+    thread to run when a thread makes a blocking system call.
+    + Also allows multiple threads to run in parallel on multiprocessors.
+    - Creating user thread requires creating a corresponding kernel thread. (costy)
+    - Because the overhead of creating kernel thread can burden the performance of 
+    an application, most implementations of this mode restrict the number of thread
+    supported by the system.
+- Many to many mode:
+    + Multiplexes many user level threads to a smaller or equal number of kernel
+    threads.
+    = The number of kernel threads may be specific to either a particular application 
+    or a particular machine.
+    + Developers can create as many user threads as necessary, and the corresponding
+    kernel threads can run in parallel on multiprocessors.
+    + When a thread performs a blocking system call, the kernel can schedule another
+    thread for execution.
+
+
+Hyperthreading (Simultaneous Multithreading (SMT))
+Hyperthreaded systems allows their processor cores' resources become multiple 
+logical processors for performance.
+It enables the processor to execute two threads, or sets of instructions, at the
+same time. Since hyper threading allows two streams to be executed in parallel,
+it's almost like to have two processors working together. 
 */
