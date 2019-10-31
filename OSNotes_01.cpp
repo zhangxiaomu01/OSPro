@@ -727,3 +727,32 @@ service crashes)
 
 */
 
+
+//***************************************************************************
+//19. Introduction to thread
+/*
+A thread is a basic unit of CPU utilization. It comprises of a thread ID, a 
+program counter, a register set and a stack. It shares with other threads within
+the same process its code section, data section and other operating system 
+resources, such as open files and signals.
+
+A traditional/heavyweight process can has a single thread of control. If a process
+has multiple threads of control, it can perform more than one task at a time.
+
+Benefits of multithreaded programming:
+a) Responsiveness: Multithreading an interactive application may allow a program
+to continue running even if part of it is blocked or is performing a lengthy
+operation, thereby increasing responsiveness to the user.
+b) Resourse sharing: By default, threads share the memory and the resources of
+the process to which they belong. The benefit of sharing code and data is that it
+allows an application to have several different threads of activity within the
+same address space.
+c) Economy: Allocating memory and resources for process creation is costly. Because
+threads share resources of the process to which they belong to, it is more 
+economical to create and context-switch threads.
+d) Utilization of multiprocessor architecture: The benefits of multithread can 
+be greatly increased in a multiprocessor architecture, where threads may be running
+in parallel on different processors. A single threaded process can only run on
+one CPU, no matter how many are available. Multithreading on a multi-CPU machine
+increases concurrency.
+*/
