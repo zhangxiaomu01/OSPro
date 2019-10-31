@@ -798,3 +798,69 @@ It enables the processor to execute two threads, or sets of instructions, at the
 same time. Since hyper threading allows two streams to be executed in parallel,
 it's almost like to have two processors working together. 
 */
+
+
+//***************************************************************************
+//20. fork() and exec() system call
+/*
+fork(): The fork() system call is used to create a separate, duplicate process.
+exec(): When an exec() system call is invoked, the program specified in the
+parameters to exec() will replace the entire process -- including all threads.
+*/
+
+//***************************************************************************
+//21. Threading issue
+/*
+Issue 1:
+The semantics of fork() and exec() system calls change in a multithreaded program.
+
+If one thread in a program calls fork(), does the new process duplicates all 
+threads or is the new process single-threaded?  
+Solution: Some UNIX system chose to have two versions of fork(), one that duplicates
+all threads and another that duplicates only the thread that invoked the fork()
+system call.
+
+For exec() system call, if a thread invokes the exec() system call, the program 
+specified in the parameter to exec() will replace entire process -- including 
+all threads. 
+
+Which version of for() call to use and when?
+- If exec() is called immediately after forking:
+In this instance, duplicating only the calling thread. (No necessary to duplicate
+other threads since exec() will replace all the threads)
+- If the separate process does not call exec() after forking:
+Then the separate process should duplicate all threads.
+
+Issue 2: Thread cancellation
+Thread cancellation is the task of terminating a thread before it is completed.
+When?
+e.g. If multiple threads are concurrently searching through a database and one
+thread returns the result, the remaining threads might be cancelled. 
+e.g. When a user presses a button on a web browser that stops a web page from 
+loading any further, all threads that load the page are cancelled.
+
+A thread that is to be cancelled is often referred to as the target thread.
+
+Cancellation of a target thread may occur in two different scenarios:
+- Asynchronous cancellation: One thread that immediately terminates the target
+thread;
+- Deferred cancellation: The target thread periordically checks whether it should
+terminate, allowing it an opportunity to terminate itself in an orderly fashion.
+
+The difficulty with cancellation lies:
+In situations where:
+- Resources have been allocated to a canceled thread;
+- A thread is canceled while in the midst of updating data which is shared with
+other threads.
+Often, OS will reclaim the system resources from a canceled thread but will not
+reclaim all resources. Therefore, canceling a thread asynchronously may not 
+free a necessary system wide resource.
+
+With deferred cancellation, one thread is indicated that a target thread is to
+be canceled, however, the cancallation occurs only after the target thread has 
+checked a flag to determine if it should be canceled or not. This allows a thread
+to check whether it should be canceled at a point when it can be canceled safely.
+*/
+
+
+
