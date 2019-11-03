@@ -941,4 +941,62 @@ Scheduling criteria:
 
 
 
+//***************************************************************************
+//21. Scheduling algorithm
+/*
+- First come, first served scheduling. (FCFS)
+The process that requests the CPU first is allocated CPU first. (Simplest 
+algorithm)
+The implementation of the FCFS policy is easily managed with a FIFO queue. When
+a process enters the ready queue, its PCB is linked onto the tail of the FIFO
+queue. When the CPU is free, it's allocated to the head of the FIFO queue. The 
+running process then removed from the queue.
 
+The average waiting time under the FCFS policy is usually quite long. The waiting
+time under the FCFS is generally not minimal and may vary substantially if the
+process's CPU burst times vary greatly.
+
+FCFS algorithm is non-preemptive.
+    - Once the CPU has been allocated to a process, that process keeps the CPU 
+    until it releases the CPU, either by terminating or by requesting I/O;
+    - The FCFS algorithm is especially troublesome under time-sharing systems, 
+    where it is important that each user gets a share of the CPU at regular 
+    intervals.
+
+Convoy effect: if the processes with higher burst time arrived before the 
+processes with smaller burst time, then, smaller processes have to wait for a 
+long time for longer processes to release the CPU.
+
+Solved Problem with FCFS:
+p1: 
+Process ID      Arrival    Burst      Completion    Turnaround      Waiting   
+P1              4           5           9               5              0
+P2              6           4           17              11             7
+P3              0           3           3               3              0
+P4              6           2           19              13             11
+P5              5           4           13              8              4
+
+Turn around time = completion time - arrival time;
+Waiting time = Turn around time - Burst time.
+
+Average turnaround time is 8 ms, and average waiting time is 4 ms.
+
+p2:
+Process ID      Arrival    Burst      Completion       
+P1              0           3           4               
+P2              1           2           7              
+P3              2           1           9               
+P4              3           4           14              
+P5              4           5           20             
+P6              5           2           23
+
+If FCFS algorithm is followed and there is one unit of overhead in scheduling 
+the process, find the efficiency of the algorithm.
+
+Total time: 23          Wasted time: 6
+Efficiency = (23 - 6) / 23 = 73.91%
+
+
+
+
+*/
