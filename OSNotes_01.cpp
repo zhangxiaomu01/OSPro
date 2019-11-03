@@ -907,4 +907,38 @@ is a choice for 2) and 3).
 
 When scheduling only happens under 1) and 4), we say that the scheduling scheme
 is non-preemptive or cooperative; otherwise, it is preemptive.
+
+
+Scheduling criteria:
+- CPU utilization:  We want to keep the CPU as busy as possible. Conceptually, 
+                    CPU utilization can range from 0 - 100 percent. In a real 
+                    system, it should range from 40 percent (a lightly loaded 
+                    system) to 90 percent (a heavily used system). 
+- Throughput:       If CPU is busy executing processes, then work is being done.
+                    One measure of work is the number of processes that are 
+                    completed per time unit, called throughput.
+- Turnaround Time:  From the point of view of a particular process, the important
+                    criterion is how long it takes to execute that process. The
+                    interval from the time of submission of a process to the time
+                    of completion is the turnaround time. Turnaround time is the
+                    sum of the periods spent waiting to get into memory, waiting
+                    in the ready queue, executing on the CPU and doing I/O.
+- Waiting Time:     The CPU scheduling algorithm does not affect the amount of 
+                    time during which a process executes or does I/O; it affects
+                    only the amount of time that a process spends waiting in the
+                    ready queue. Waiting time is the sum of the periods spent 
+                    waiting in the ready queue.
+- Response Time:    In an interactive system, turnaround time may not be the best
+                    criterion. Often, a process can produce some output fairly 
+                    early and can continue computing new results while previous
+                    results are being output to the user. Thus, another measure 
+                    is the time from the submission of a request until the first
+                    response is produced. This measure, called response time, is
+                    the time it takes to start responding, not the time it takes
+                    to output the response. The turnaround time is generally 
+                    limited by the speed of the output device.
 */
+
+
+
+
