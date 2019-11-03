@@ -997,6 +997,49 @@ Total time: 23          Wasted time: 6
 Efficiency = (23 - 6) / 23 = 73.91%
 
 
+- Shortest Job First Scheduling. (SJF)
+The algorithm associates each process with the length of the process's next CPU
+burst; When the CPU is available, it is assigned to the process that has the
+smallest next CPU burst.
+
+If the next CPU bursts of two processes are the same, then FCFS scheduling is 
+used to break the tie.
+
+The SJF algorithm is either preemptive or non-preemptive.
+
+A more appropriate term for this scheduling algorithm could be 
+Shortest Next CPU Burst Scheduling Algorithm. 
+because the scheduling depends on the length of the next CPU burst of a process,
+ranther than it's total length.
+
+Preemptive SJF is sometimes referred as shortest remaining time first algorithm.
+
+Issues with SJF:
+- The real difficulty with SJF algorithm is knowing the length of the next CPU 
+request;
+- There is no way to know the length of next CPU burst.
+
+One implementation approach could be:
+- Try to approximate the SJF scheduling algorithm;
+- We may not be able to know the length of the next CPU burst, but we may be 
+able to predict its value;
+- We expect the next CPU burst will be similar in length with the previous ones.
+- Thus, by computing an approximation of the length of the next CPU burst, we 
+can pick the process with the shortest predicted CPU burst.
+
+Solved Problem with SJF:
+p1: (preemptive) Find the average waiting time:
+Process ID      Arrival    Burst      Completion    Waiting       
+P1              0           8           17          9
+P2              1           4           5           0   
+P3              2           9           26          15     
+P4              3           5           10          2
+
+Waiting Time = Total Waiting Time - # of milliseconds the process executed - Arrival Time
+
+Average waiting time  = (9 + 0 + 15 + 2) / 4 = 6.5
+
+
 
 
 */
