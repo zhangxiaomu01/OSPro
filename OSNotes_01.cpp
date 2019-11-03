@@ -1039,7 +1039,23 @@ Waiting Time = Total Waiting Time - # of milliseconds the process executed - Arr
 
 Average waiting time  = (9 + 0 + 15 + 2) / 4 = 6.5
 
+p2: (preemptive) Find the average waiting time:
+Process ID      Arrival    Burst      Completion    Waiting       
+P1              0           12          27          15
+P2              2           4           6           0   
+P3              3           6           12          3     
+P4              8           5           17          4
 
+Average waiting time: (15 + 0 + 3 + 4) / 4 = 5.5
 
+p3: (preemptive) Find the average turnaround time:
+Process ID      Arrival    Burst      Completion    Turnaround       
+P1              0           10          20           20
+P2              3           6           10           7   
+P3              7           1           8            1     
+P4              8           3           13           5
+
+Turn around time = completion time - arrival time;
+Average turnaround time = (20 + 7 + 1 + 5) / 4 = 8.25
 
 */
