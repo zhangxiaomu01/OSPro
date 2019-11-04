@@ -1058,4 +1058,52 @@ P4              8           3           13           5
 Turn around time = completion time - arrival time;
 Average turnaround time = (20 + 7 + 1 + 5) / 4 = 8.25
 
+
+- Priority Scheduling.
+A priority is associated with each process, and the CPU is allocated to the 
+process with the highest priority; equal priority processes are scheduled in
+FCFS order.
+
+An SJF algorithm is simply a priority algorithm where the priority is the inverse
+of the (predicted) next CPU burst. The larger the CPU burst, the lower the 
+priority, and vice versa.
+
+Priority scheduling can be either preemptive or non-preemptive.
+
+Problem with priority scheduling algorithm:
+- A major problem with priority scheduling algorithm is indefinite blocking, or
+starvation;
+- A process that is ready to run but waiting for the CPU can be considered as
+blocked;
+- A priority scheduling algorithm can leave some low priority processes waiting
+indefinitely;
+- In a heavily loaded computer system, a steady stream of high priority processes
+can prevent a low priority process from ever getting the CPU.
+Solution to the problem: Aging
+- Aging is a technique of gradually increasing the priority of processes that 
+wait in the system for a long time.
+
+Solved problem with priority scheduling algorithm:
+p1: preemptive.
+Process ID      Arrival    Burst      priority      Waiting    
+P1              0           11        2              38 
+P2              5           28        0 (highest)    0          
+P3              12          2         3              37 
+P4              2           10        1              28
+P5              9           16        4              42
+Waiting Time = Total Waiting Time - # of milliseconds the process executed - Arrival Time
+Average waiting time = (38 + 0 + 37 + 28 + 42) / 5 = 29 ms
+
+p2. non-preemptive.
+Process ID      Arrival    Burst      priority      Waiting    Turnaround
+P1              0           4          2 (lowest)     0         4
+P2              1           3          3              11        14
+P3              2           1          4              9         10
+P4              3           5          5              1         6
+P5              4           2          5              5         7
+
+Average turnaround time = (4 + 14 + 10 + 6 + 7) / 5 = 8.2 ms
+Average waiting time = (0 + 11 + 9 + 1 + 5) / 5 = 5.2 ms
+
+
 */
