@@ -1134,4 +1134,39 @@ Then One of the two things will happen:
     of the ready queue;
     - Then the CPU scheduler will select the next process in the ready queue. 
 
+Solved problem with round-robin algorithm:
+p1: quantum = 2 units
+Process ID      Arrival    Burst      Completion      Waiting    Turnaround
+P1              0           5          13             8            13
+P2              1           3          12             8            11
+P3              2           1          5              2            3
+P4              3           2          9              4            6
+P5              4           2          14             7            10
+
+Average turnaround time = (13 + 11 + 3 + 6 + 10) / 5 = 8.6 ms
+Average waiting time = (8 + 8 + 2 + 4 + 7) / 5 = 5.8 ms
+
+
+- Multilevel queue scheduling
+A class of scheduling algorithms has been created for situations in which 
+processes are easily classified into different groups.
+e.g. The processes may have different response time requirements or different
+scheduling needs. (Foreground processes need to be more responsive compared 
+with background processes)
+
+The multilevel queue scheduling algorithm partitions the ready queue into several
+separate queues:
+    - The processes are permanently assigned to one queue, generally based on 
+    some properties of the process, such as memory size, process priority or 
+    process type;
+    - Each queue has its own scheduling algorithm.
+    - In addition, there must be scheduling among the queues, which is commonly
+    implemented as fixed-priority preemptive scheduling.
+
+An example:
+System processes (highest priority)
+Interactive processes
+Interactive editing processes
+Batch processes
+Student processes (lowest priority)
 */
