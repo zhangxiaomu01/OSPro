@@ -1106,4 +1106,32 @@ Average turnaround time = (4 + 14 + 10 + 6 + 7) / 5 = 8.2 ms
 Average waiting time = (0 + 11 + 9 + 1 + 5) / 5 = 5.2 ms
 
 
+- Round-Robin Scheduling
+The round-robin scheduling algorithm is designed especially for time-sharing
+systems; it's similar to FCFS scheduling algorithm, but preemption is added to
+switch between processes.
+
+In this algorithm, a small unit of time, also called as a time quantum or a time
+slice is defined (generally from 10 to 100 milliseconds).
+
+The ready queue is treated as a circular queue. The CPU schedular goes around 
+the ready queue, allocating the CPU to each process for a time interval up to 
+1 time interval.
+
+Implementation of round-robin scheduling:
+- We keep the ready queue as a FIFO queue of processes;
+- New processes are added to the tail of the ready queue;
+- The CPU scheduler picks the first process from the ready queue, sets a timer
+to interrupt after 1 time quantum, and dispatches the process.
+Then One of the two things will happen:
+- The process may have a CPU burst less than 1 time quantum:
+    - The process itself will release the CPU voluntarily;
+    - The CPU scheduler will then proceed to the next process in the ready queue.
+    (pop the processed process out of the queue)
+- The process may have a CPU burst longer than 1 time quantum:
+    - The timer will then go off and cause an interrupt to the OS;
+    - A context switch will be executed, and the process will be put at the tail
+    of the ready queue;
+    - Then the CPU scheduler will select the next process in the ready queue. 
+
 */
