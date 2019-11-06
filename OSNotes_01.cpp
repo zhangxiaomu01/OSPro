@@ -1169,4 +1169,33 @@ Interactive processes
 Interactive editing processes
 Batch processes
 Student processes (lowest priority)
+
+
+- Multilevel feedback-queue scheduling
+The multilevel feedback queue algorithm allows a process to move between queues.
+
+The idea is to separate processes according to the characteristics of their CPU
+bursts.
+
+If a process uses too much CPU time, it will be moved to a lower priority queue.
+
+This scheme leaves I/O bound and interactive processes in the higher priority 
+queues.
+
+In addition, a process that waits too long in a lower priority queue may be 
+moved to a higher priority queue.
+
+This form of aging prevents starvation.
+
+In general, a multilevel feedback queue scheduler is defined by the following 
+parameters:
+- The number of queues;
+- The scheduling algorithm for each queue;
+- The method used to determine when to upgrade a process to a higher priority 
+queue;
+- The method used to determine when to demote a process to a lower priority 
+queue;
+- The method used to determine which queue a process will enter when that process
+needs service.
 */
+
